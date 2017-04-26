@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "node",
+    "lib": ["es6"],
+    "types": [
+      "acl",
+      "express",
+      "mongoose",
+      "node"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "public"
+  ]
+}

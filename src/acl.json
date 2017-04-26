@@ -1,0 +1,13 @@
+[
+  {
+    "roles": [
+      "guest"
+    ],
+    "allows": [
+      {
+        "resources": "/api/users",
+        "permissions": ["get"]
+      }
+    ]
+  }
+]
