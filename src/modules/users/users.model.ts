@@ -1,5 +1,5 @@
-import * as mongoose from 'mongoose';
-import * as bcrypt from 'bcrypt-nodejs';
+import mongoose = require('mongoose');
+import bcrypt = require('bcrypt-nodejs');
 
 interface IUser {
   email: string;
@@ -27,6 +27,9 @@ const userSchema = new mongoose.Schema({
   roles: [{
     type: String,
   }],
+}, {
+  autoIndex: true,
+  timestamps: true,
 });
 
 userSchema.methods.verifyPassword = function(password: string, cb: any) {

@@ -6,6 +6,7 @@ import winston = require('winston');
 import morgan = require('morgan');
 import acl = require('acl');
 import jwt = require('express-jwt');
+import cors = require('cors');
 
 import { UsersModule } from './modules/users';
 import { AuthModule } from './modules/auth';
@@ -25,6 +26,7 @@ class App {
     mongoose.connect(process.env.MONGO_URI);
 
     // data handling
+    appInstance.use(cors());
     appInstance.use(bodyParser.json());
 
     // auth
@@ -34,15 +36,12 @@ class App {
     }));
 
     // acl
-    const aclInstance = new acl(new acl.memoryBackend());
+    const aclInstance = new acl(new acl.memoryBackend(), winston);
     aclInstance.allow(aclRules);
 
-    // router
-    const routerInstance: express.Router = express.Router();
-
     // modules
-    AuthModule.setup(appInstance, routerInstance);
-    UsersModule.setup(appInstance, routerInstance, aclInstance);
+    AuthModule.setup(appInstance);
+    UsersModule.setup(appInstance, aclInstance);
 
     // errors handling
     appInstance.use((err, req, res, next) => next(err));

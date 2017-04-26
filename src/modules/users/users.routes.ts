@@ -2,8 +2,10 @@ import { Router } from 'express';
 import { UsersController } from './users.controller';
 import { AuthMiddleware } from '../auth';
 
+const router = Router();
+
 class UsersRoutes {
-  public static setup = (router: Router, acl: any) => router
+  public static setup = (acl: any) => router
     .get('/', AuthMiddleware.guard(acl), UsersController.findAll)
     .post('/', AuthMiddleware.guard(acl), UsersController.save)
     .get('/:_id', AuthMiddleware.guard(acl), UsersController.read)

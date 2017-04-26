@@ -1,9 +1,9 @@
-import { Application, Router } from 'express';
+import { Application } from 'express';
 import { AuthRoutes } from './auth.routes';
 
 class AuthModule {
-  public static setup = (app: Application, router: Router) =>
-    app.use('/api/auth', AuthRoutes.setup(router));
+  public static setup = (app: Application) =>
+    app.use('/api/auth', AuthRoutes.setup());
 }
 
 export { AuthModule };

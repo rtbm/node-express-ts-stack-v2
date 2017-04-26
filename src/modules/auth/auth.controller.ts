@@ -1,4 +1,5 @@
 import jwt = require('jsonwebtoken');
+
 import { Request, Response, NextFunction } from 'express';
 import { UserModel, IUserModel } from '../users';
 

@@ -33,6 +33,8 @@ class UsersController {
 
         return next(err);
       }
+
+      return res.json(doc);
     });
   };
 

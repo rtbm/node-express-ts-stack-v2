@@ -1,7 +1,7 @@
 import { UserModel } from '../users';
 
 class AuthMiddleware {
-  public static guard = (acl, opts?) => (req, res, next) => {
+  public static guard = (acl, depth = 2) => (req, res, next) => {
     if (!req.user) {
       const err = new Error('Unauthorized');
       (err as any).status = 401;
@@ -24,11 +24,7 @@ class AuthMiddleware {
       acl.addUserRoles(userId, doc.roles, (err) => {
         if (err) return next(err);
 
-        req.session = Object.assign({}, req.session, {
-          userId,
-        });
-
-        return acl.middleware(...opts)(req, res, next);
+        return acl.middleware(depth, userId)(req, res, next);
       });
     });
   };
